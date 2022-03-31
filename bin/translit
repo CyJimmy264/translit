@@ -3,7 +3,13 @@ require 'rubygems'
 require 'translit'
 
 if ARGV[0]
-  puts Translit.convert ARGV.join(' ')
+  direction = :russian
+  if ARGV[0][0] == ':'
+    direction = ARGV[0][1..].to_sym
+    ARGV.shift
+  end
+
+  puts Translit.convert ARGV.join(' '), direction
 else
   output = ""
   while input = STDIN.gets
